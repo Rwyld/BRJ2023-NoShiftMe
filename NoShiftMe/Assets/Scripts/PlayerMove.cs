@@ -10,6 +10,8 @@ public class PlayerMove : MonoBehaviour
     private float movInput;
     private Rigidbody2D rb;
     private SpriteRenderer rend;
+    public GameObject LightFront, LightBack;
+    private bool activeLight1, activeLight2;
 
     private bool isGrounded;
     public Transform feetPos;
@@ -21,10 +23,13 @@ public class PlayerMove : MonoBehaviour
     private bool isJumping;
 
     private bool canDash = true;
-    private bool isDashing;
+    public bool isDashing;
     private float dashForce = 20f;
     private float dashTime = 0.2f;
-    private float dashTimeCD = 1f;
+    private float dashTimeCD = 0.3f;
+
+    public AttackController AC;
+    
 
 
     private void Start()
@@ -59,6 +64,8 @@ public class PlayerMove : MonoBehaviour
         
     }
     
+  
+    
     
     private void Move()
     {
@@ -68,13 +75,32 @@ public class PlayerMove : MonoBehaviour
 
         if (movInput > 0)
         {
-            //transform.eulerAngles = new Vector3(0, 0, 0);
-            rend.flipX = false;
+            if(AC.isAttacking) return;
+            
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            
+            if(activeLight1) return;
+            
+            LightFront.SetActive(true);
+            LightBack.SetActive(false);
+            activeLight2 = false;
+
+            //rend.flipX = false;
+
         }
         else if (movInput < 0)
         {
-            //transform.eulerAngles = new Vector3(0, 180, 0);
-            rend.flipX = true;
+            if(AC.isAttacking) return;
+            
+            transform.eulerAngles = new Vector3(0, 180, 0);
+            
+            if(activeLight2) return;
+            
+            LightFront.SetActive(false);
+            LightBack.SetActive(true);
+            activeLight1 = false;
+            
+            //rend.flipX = true;
         }
     }
     private void Jump()
