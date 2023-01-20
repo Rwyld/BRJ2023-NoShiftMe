@@ -3516,12 +3516,15 @@ MonoBehaviour:
   PM: {fileID: 976190379}
   currentWeapon: {fileID: 1958381006790578274, guid: a83c37ca174419b4ba342040ac6699b4,
     type: 3}
+  nameWeapon: 
   damage: 0
   weaponPos: {fileID: 241704750}
   isAttacking: 0
   WeaponBP:
     Weapon: {fileID: 0}
     Damage: 0
+    Name: 
+  WP: {fileID: 0}
 --- !u!1 &990465746
 GameObject:
   m_ObjectHideFlags: 0
@@ -3721,66 +3724,82 @@ MonoBehaviour:
     Weapon: {fileID: 1958381006790578274, guid: a83c37ca174419b4ba342040ac6699b4,
       type: 3}
     Damage: 5
+    Name: Stick
   Rock:
     Weapon: {fileID: 1956873262408827597, guid: 59df5af80088b604886f3750bd0a5c12,
       type: 3}
     Damage: 5
+    Name: Rock
   Rope:
     Weapon: {fileID: 1430201373460795769, guid: b56ddbad19cdd0842a9da17bbd29f639,
       type: 3}
     Damage: 5
+    Name: Rope
   Gem:
     Weapon: {fileID: 6074677128517062462, guid: 1bb263ed043558c46810fffd7d5fcdef,
       type: 3}
     Damage: 5
+    Name: Gem
   Hammer:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 15
+    Name: Hammer
   Axe:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 10
+    Name: Axe
   Whip:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 8
+    Name: Whip
   Bow:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 20
+    Name: Bow
   Wand:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 12
+    Name: Wand
   Staff:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 20
+    Name: Staff
   Bowler:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 12
+    Name: Bowler
   Mangual:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 20
+    Name: Mangual
   BurstRune:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 25
+    Name: BurstRune
   ElementalRune:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 15
+    Name: ElementalRune
   Necklace:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 10
+    Name: Necklace
   Brazalettes:
     Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
       type: 3}
     Damage: 20
+    Name: Brazalettes
   Shop: {fileID: 1839307832}
   FirstTiers:
   - {fileID: 639066803}
@@ -5318,8 +5337,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1650560825}
+  - component: {fileID: 1650560828}
+  - component: {fileID: 1650560827}
+  - component: {fileID: 1650560826}
   m_Layer: 0
-  m_Name: DreamFollower
+  m_Name: Novice
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5344,6 +5366,60 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &1650560826
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650560824}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
+--- !u!58 &1650560827
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650560824}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1
+--- !u!114 &1650560828
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650560824}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1abe271fc4c434b4b8c26d7b121a380d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 976190383}
+  meleeAttackPos: {fileID: 1590124232}
+  meleeWeapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
+    type: 3}
+  speed: 0.5
 --- !u!1 &1662717585
 GameObject:
   m_ObjectHideFlags: 0

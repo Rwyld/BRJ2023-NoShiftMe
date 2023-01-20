@@ -44,7 +44,7 @@ public class WeaponsManager : MonoBehaviour
     public GameObject[] SecondTiers;
 
     
-    [SerializeField] private int PowerDamage;
+    public int PowerDamage;
     public AttackController AC;
     
     private void Update()
@@ -122,7 +122,8 @@ public class WeaponsManager : MonoBehaviour
     {
         AC.SetWeapon(Rock);
         FirstTier_Bt[1].interactable = false;
-
+        
+        if(PowerDamage is 4) {PowerDamage +=3;}
         PowerDamage += 2;
         Shop.SetActive(false);
 
