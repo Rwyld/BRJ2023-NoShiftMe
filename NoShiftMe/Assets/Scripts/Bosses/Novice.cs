@@ -30,7 +30,7 @@ public class Novice : MonoBehaviour
     
     //Stats
     public int health;
-    public int contactDamage;
+    public float contactDamage;
     
     private void Start()
     {

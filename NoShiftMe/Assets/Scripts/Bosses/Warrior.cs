@@ -10,7 +10,7 @@ public class Warrior : MonoBehaviour
     private Animator animator;
     public Transform rightPos, leftPos;
     public int health = 50;
-    public int contactDamage = 1;
+    public float contactDamage = 1;
     public float speed = 10f;
 
     private int state, nextState;
@@ -30,25 +30,6 @@ public class Warrior : MonoBehaviour
     {
         BossBehaviour(1);
 
-    }
-
-    public void TakeDamage(int dmg)
-    {
-        health -= dmg;
-
-        if (health == 0)
-        {
-            col.enabled = false;
-            Destroy(gameObject);
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D col)
-    {
-        if (col.gameObject.name == "Player")
-        {
-            PS.TakeDamage(contactDamage);
-        }
     }
 
     private void BossBehaviour(int phase)

@@ -12,8 +12,8 @@ public class AttackController : MonoBehaviour
     public float damage;
     public Transform weaponPos;
 
-    private float timeAttack = 0.5f;
-    private float timeAttackCD = 0.5f;
+    [SerializeField] private float timeAttack = 0.5f;
+    [SerializeField] private float timeAttackCD = 0.5f;
     private bool attack_1 = true;
     private bool attack_2 = false;
     private bool attack_3 = false;
@@ -52,40 +52,19 @@ public class AttackController : MonoBehaviour
         timeAttack -= Time.deltaTime;
 
         if(specialAttack) return;
-        
-        if (timeAttack < 0)
-        {
-            attack_1 = true;
-            attack_2 = false;
-            attack_3 = false;
-            isAttacking = false;
-        }
 
-
-        if (Input.GetKeyDown(KeyCode.C) && attack_1)
+        if (Input.GetKey(KeyCode.C) && timeAttack <= 0)
         {
-            var firstAttack = Instantiate(currentWeapon, weaponPos.position, Quaternion.identity, this.transform);
-            Destroy(firstAttack, 0.2f);
-            attack_1 = false;
-            attack_2 = true;
+            var bullets = Instantiate(currentWeapon);
+            bullets.transform.position = weaponPos.position;
+            bullets.transform.rotation = transform.rotation;
+            Destroy(bullets, 1f);
             timeAttack = timeAttackCD;
             isAttacking = true;
         }
-        else if (Input.GetKeyDown(KeyCode.C) && attack_2)
+        else if (Input.GetKeyUp(KeyCode.C))
         {
-            var secondAttack = Instantiate(currentWeapon, weaponPos.position, Quaternion.identity, this.transform);
-            Destroy(secondAttack, 0.2f);
-            attack_2 = false;
-            attack_3 = true;
-            timeAttack = timeAttackCD;
-        }
-        else if (Input.GetKeyDown(KeyCode.C) && attack_3)
-        {
-            var thirdAttack = Instantiate(currentWeapon, weaponPos.position, Quaternion.identity, this.transform);
-            Destroy(thirdAttack, 0.2f);
-            attack_3 = false;
-            attack_1 = true;
-            timeAttack = timeAttackCD;
+            isAttacking = false;
         }
     }
 
