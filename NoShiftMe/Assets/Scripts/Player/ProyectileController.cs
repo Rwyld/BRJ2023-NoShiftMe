@@ -6,7 +6,7 @@ using UnityEngine;
 public class ProyectileController : MonoBehaviour
 {
     [SerializeField] private float speed = 15f;
-    [SerializeField] private int damage = 1;
+    [SerializeField] private int damage;
     private Rigidbody2D rb;
 
     private void Start()

@@ -9,4 +9,5 @@ public class WeaponsBlueprints
     public GameObject Weapon;
     public int Damage;
     public string Name;
+    public float FireRate;
 }

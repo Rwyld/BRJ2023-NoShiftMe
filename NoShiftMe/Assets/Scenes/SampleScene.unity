@@ -750,7 +750,7 @@ GameObject:
   m_Component:
   - component: {fileID: 241704750}
   m_Layer: 0
-  m_Name: Weapon_Pos
+  m_Name: Shoot_Point
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2015,6 +2015,37 @@ Transform:
   m_Father: {fileID: 976190383}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1 &599633434
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 599633435}
+  m_Layer: 0
+  m_Name: Shoot_Point_Multi2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &599633435
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599633434}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: -0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 976190383}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &639066803
 GameObject:
   m_ObjectHideFlags: 0
@@ -3552,6 +3583,8 @@ Transform:
   - {fileID: 1108981507}
   - {fileID: 561073455}
   - {fileID: 241704750}
+  - {fileID: 1568675637}
+  - {fileID: 599633435}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3570,9 +3603,13 @@ MonoBehaviour:
   PM: {fileID: 976190379}
   currentWeapon: {fileID: 203522496034739903, guid: d59a302770855e346b30fceef2f3a6f9,
     type: 3}
+  meleeSpecial: {fileID: 0}
   nameWeapon: 
   damage: 0
-  weaponPos: {fileID: 241704750}
+  weaponPos:
+  - {fileID: 241704750}
+  - {fileID: 1568675637}
+  - {fileID: 599633435}
   timeAttack: 0.1
   timeAttackCD: 0.1
   isAttacking: 0
@@ -3580,7 +3617,9 @@ MonoBehaviour:
     Weapon: {fileID: 0}
     Damage: 0
     Name: 
+    FireRate: 0
   WP: {fileID: 0}
+  multishoot: 0
 --- !u!114 &976190385
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3790,111 +3829,162 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1bc0ef0ca1f6c2c4e8704edd6fb49672, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Stick:
-    Weapon: {fileID: 1958381006790578274, guid: a83c37ca174419b4ba342040ac6699b4,
-      type: 3}
-    Damage: 5
-    Name: Stick
-  Rock:
-    Weapon: {fileID: 1956873262408827597, guid: 59df5af80088b604886f3750bd0a5c12,
-      type: 3}
-    Damage: 5
-    Name: Rock
-  Rope:
-    Weapon: {fileID: 1430201373460795769, guid: b56ddbad19cdd0842a9da17bbd29f639,
-      type: 3}
-    Damage: 5
-    Name: Rope
-  Gem:
-    Weapon: {fileID: 6074677128517062462, guid: 1bb263ed043558c46810fffd7d5fcdef,
-      type: 3}
-    Damage: 5
-    Name: Gem
-  Hammer:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 15
-    Name: Hammer
-  Axe:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 10
-    Name: Axe
-  Whip:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 8
-    Name: Whip
-  Bow:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 20
-    Name: Bow
-  Wand:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 12
-    Name: Wand
-  Staff:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 20
-    Name: Staff
-  Bowler:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 12
-    Name: Bowler
-  Mangual:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 20
-    Name: Mangual
-  BurstRune:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 25
-    Name: BurstRune
-  ElementalRune:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 15
-    Name: ElementalRune
-  Necklace:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 10
-    Name: Necklace
-  Brazalettes:
-    Weapon: {fileID: 8869486254054895222, guid: 816b527a497173a44a24b4cee6ec412b,
-      type: 3}
-    Damage: 20
-    Name: Brazalettes
+  Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Splash_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Multi_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Splash_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Multi_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  AA_Splash_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  MA_Splash_Tainted_Balss:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  AA_Multi_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  MA_Multi_Tainted_Balss:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  AA_Splash_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  MA_Splash_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  AA_Multi_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  MA_Multi_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_AA_Splash_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_MA_Splash_Tainted_Balss:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_AA_Multi_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_MA_Multi_Tainted_Balss:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_AA_Splash_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_MA_Splash_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_AA_Multi_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  Rainbow_MA_Multi_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_AA_Splash_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_MA_Splash_Tainted_Balss:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_AA_Multi_Tainted_Balls:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_MA_Multi_Tainted_Balss:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_AA_Splash_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_MA_Splash_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_AA_Multi_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
+  FireUpPlus_MA_Multi_Basic_Fireup:
+    Weapon: {fileID: 0}
+    Damage: 0
+    Name: 
+    FireRate: 0
   Shop: {fileID: 1839307832}
-  FirstTiers:
-  - {fileID: 639066803}
-  - {fileID: 1875808339}
-  - {fileID: 1997823303}
-  - {fileID: 2135428954}
-  FirstTier_Bt:
-  - {fileID: 639066805}
-  - {fileID: 1875808341}
-  - {fileID: 1997823305}
-  - {fileID: 2135428956}
-  SecondTiers:
-  - {fileID: 1723558209}
-  - {fileID: 58310061}
-  - {fileID: 942490559}
-  - {fileID: 865461087}
-  - {fileID: 649618400}
-  - {fileID: 1662717585}
-  - {fileID: 1985985943}
-  - {fileID: 1633586372}
-  - {fileID: 270188421}
-  - {fileID: 384857137}
-  - {fileID: 1980506947}
-  - {fileID: 1276617814}
-  PowerDamage: 0
+  PencilBoss: []
+  PincelBoss: []
+  RulerBoss: []
+  MarkerBoss: []
+  WeaponType: 0
   AC: {fileID: 976190384}
 --- !u!4 &1016738002
 Transform:
@@ -5443,6 +5533,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1541188880}
   m_CullTransparentMesh: 1
+--- !u!1 &1568675636
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1568675637}
+  m_Layer: 0
+  m_Name: Shoot_Point_Multi1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1568675637
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568675636}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1, y: 0.25, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 976190383}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1581798616
 GameObject:
   m_ObjectHideFlags: 0
