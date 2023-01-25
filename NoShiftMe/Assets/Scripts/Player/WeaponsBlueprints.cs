@@ -7,7 +7,8 @@ using UnityEngine;
 public class WeaponsBlueprints
 {
     public GameObject Weapon;
-    public int Damage;
-    public string Name;
+    public string Special;
+    public string TypeAttack;
     public float FireRate;
+    
 }

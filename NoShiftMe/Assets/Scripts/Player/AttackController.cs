@@ -9,28 +9,23 @@ public class AttackController : MonoBehaviour
 {
     public PlayerMove PM;
     public GameObject currentWeapon, meleeSpecial;
-    public string nameWeapon;
-    public float damage;
     public Transform[] weaponPos;
 
-    [SerializeField] private float timeAttack = 0.5f;
-    [SerializeField] private float timeAttackCD = 0.5f;
-    private bool attack_1 = true;
-    private bool attack_2 = false;
-    private bool attack_3 = false;
+    [SerializeField] private float timeAttack;
+    [SerializeField] private float timeAttackCD;
     public bool isAttacking;
     
     public WeaponsBlueprints WeaponBP;
-    
-    public WeaponsManager WP;
-    private float TimeSpecialAttack = 1f;
-    private float TimeSpecialAttackCD = 1f;
-    private bool specialAttack = true;
-    [SerializeField] private bool multishoot = false;
-        
-    
-    
-    
+    public string SpecialWeapon;
+    public string TypeAttack;
+
+    private float TimeSpecialAttack = 0f;
+    private float TimeSpecialAttackCD = 5f;
+    private bool specialAttack = false;
+
+
+
+
 
     private void Update()
     {
@@ -44,8 +39,8 @@ public class AttackController : MonoBehaviour
     {
         WeaponBP = Weapon;
         currentWeapon = WeaponBP.Weapon;
-        damage = WeaponBP.Damage;
-        nameWeapon = WeaponBP.Name;
+        SpecialWeapon = WeaponBP.Special;
+        TypeAttack = WeaponBP.TypeAttack;
         timeAttackCD = WeaponBP.FireRate;
     }
     
@@ -56,9 +51,9 @@ public class AttackController : MonoBehaviour
 
         if(specialAttack) return;
 
-        if (Input.GetKey(KeyCode.C) && timeAttack <= 0)
+        if (Input.GetKey(KeyCode.C) && timeAttack < 0)
         {
-            if (multishoot == true)
+            if (TypeAttack == "Multishoot")
             {
                 foreach (var pos in weaponPos)
                 {
@@ -75,9 +70,6 @@ public class AttackController : MonoBehaviour
                 bullets.transform.rotation = transform.rotation;
                 Destroy(bullets, 1f);
             }
-            
-            
-
             timeAttack = timeAttackCD;
             isAttacking = true;
         }
@@ -92,35 +84,35 @@ public class AttackController : MonoBehaviour
     {
         TimeSpecialAttack -= Time.deltaTime;
 
-        if (TimeSpecialAttack < 0)
+        if (Input.GetKeyDown(KeyCode.Z) & TimeSpecialAttack < 0)
         {
-            specialAttack = false;
-        }
-
-        if (Input.GetKeyDown(KeyCode.Z) & specialAttack == false)
-        {
-            switch (nameWeapon)
+            switch (SpecialWeapon)
             {
                 case "AutoAimBurst":
                     for (int i = 0; i < 10; i++)
                     {
-                        var AutoAim = Instantiate(currentWeapon, weaponPos[0].position, Quaternion.identity, this.transform);
+                        var AutoAim = Instantiate(currentWeapon, weaponPos[0].position, Quaternion.identity);
                         AutoAim.transform.rotation = Quaternion.Euler(0,0,Random.Range(-15,15));
+                        Destroy(AutoAim, 1f);
                     }
-                    specialAttack = true;
+                    StartCoroutine(SpecialCountdown());
                     break;
                 case "MeleeAttack":
                     var melee = Instantiate(meleeSpecial, weaponPos[0].position, Quaternion.identity, this.transform);
                     Destroy(melee, 0.2f);
+                    StartCoroutine(SpecialCountdown());
                     break;
             }
-            
-            
         }
-        
-        
-        
     }
 
+
+    IEnumerator SpecialCountdown()
+    {
+        TimeSpecialAttack = TimeSpecialAttackCD;
+        specialAttack = true;
+        yield return new WaitForSeconds(2f);
+        specialAttack = false;
+    }
 
 }

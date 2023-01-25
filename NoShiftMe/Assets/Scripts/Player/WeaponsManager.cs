@@ -7,32 +7,34 @@ using UnityEngine.UI;
 
 public class WeaponsManager : MonoBehaviour
 {
-    //Pencil
+    [Header("Start")]
+    public WeaponsBlueprints Basic;
+    [Header("PencilBoss")]
     public WeaponsBlueprints Tainted_Balls;
     public WeaponsBlueprints Basic_Fireup;
 
-    //Pincel
+    [Header("PincelBoss")]
     public WeaponsBlueprints Splash_Tainted_Balls;
     public WeaponsBlueprints Multi_Tainted_Balls;
     public WeaponsBlueprints Splash_Basic_Fireup;
     public WeaponsBlueprints Multi_Basic_Fireup;
 
-    //Ruler
+    [Header("RulerBoss")]
     public WeaponsBlueprints AA_Splash_Tainted_Balls;
     public WeaponsBlueprints MA_Splash_Tainted_Balss;
     public WeaponsBlueprints AA_Multi_Tainted_Balls;
-    public WeaponsBlueprints MA_Multi_Tainted_Balss;
+    public WeaponsBlueprints MA_Multi_Tainted_Balls;
 
     public WeaponsBlueprints AA_Splash_Basic_Fireup;
     public WeaponsBlueprints MA_Splash_Basic_Fireup;
     public WeaponsBlueprints AA_Multi_Basic_Fireup;
     public WeaponsBlueprints MA_Multi_Basic_Fireup;
 
-    //Marker
+    [Header("MarkerBoss")]
     public WeaponsBlueprints Rainbow_AA_Splash_Tainted_Balls;
-    public WeaponsBlueprints Rainbow_MA_Splash_Tainted_Balss;
+    public WeaponsBlueprints Rainbow_MA_Splash_Tainted_Balls;
     public WeaponsBlueprints Rainbow_AA_Multi_Tainted_Balls;
-    public WeaponsBlueprints Rainbow_MA_Multi_Tainted_Balss;
+    public WeaponsBlueprints Rainbow_MA_Multi_Tainted_Balls;
 
     public WeaponsBlueprints Rainbow_AA_Splash_Basic_Fireup;
     public WeaponsBlueprints Rainbow_MA_Splash_Basic_Fireup;
@@ -40,21 +42,28 @@ public class WeaponsManager : MonoBehaviour
     public WeaponsBlueprints Rainbow_MA_Multi_Basic_Fireup;
 
     public WeaponsBlueprints FireUpPlus_AA_Splash_Tainted_Balls;
-    public WeaponsBlueprints FireUpPlus_MA_Splash_Tainted_Balss;
+    public WeaponsBlueprints FireUpPlus_MA_Splash_Tainted_Balls;
     public WeaponsBlueprints FireUpPlus_AA_Multi_Tainted_Balls;
-    public WeaponsBlueprints FireUpPlus_MA_Multi_Tainted_Balss;
+    public WeaponsBlueprints FireUpPlus_MA_Multi_Tainted_Balls;
 
     public WeaponsBlueprints FireUpPlus_AA_Splash_Basic_Fireup;
     public WeaponsBlueprints FireUpPlus_MA_Splash_Basic_Fireup;
     public WeaponsBlueprints FireUpPlus_AA_Multi_Basic_Fireup;
     public WeaponsBlueprints FireUpPlus_MA_Multi_Basic_Fireup;
 
+    
+    [Header("ShopManager")]
     public GameObject Shop;
+    public GameObject StartWeapon;
     public GameObject[] PencilBoss, PincelBoss, RulerBoss, MarkerBoss;
-
-
     public int WeaponType;
     public AttackController AC;
+
+    private void Start()
+    {
+        Shop.SetActive(true);
+    }
+
 
     private void Update()
     {
@@ -64,10 +73,20 @@ public class WeaponsManager : MonoBehaviour
             GenerateShop(1);
         }
 
-        if (Input.GetKeyDown(KeyCode.O))
+        if (Input.GetKeyDown(KeyCode.Y))
         {
             Shop.SetActive(true);
             GenerateShop(2);
+        }
+        if (Input.GetKeyDown(KeyCode.U))
+        {
+            Shop.SetActive(true);
+            GenerateShop(3);
+        }
+        if (Input.GetKeyDown(KeyCode.I))
+        {
+            Shop.SetActive(true);
+            GenerateShop(4);
         }
     }
 
@@ -83,7 +102,7 @@ public class WeaponsManager : MonoBehaviour
 
         if (Tier == 2)
         {
-            foreach (var buttoms in PincelBoss)
+            foreach (var buttoms in PencilBoss)
             {
                 buttoms.SetActive(false);
             }
@@ -102,7 +121,7 @@ public class WeaponsManager : MonoBehaviour
         }
         if (Tier == 3)
         {
-            foreach (var buttoms in RulerBoss)
+            foreach (var buttoms in PincelBoss)
             {
                 buttoms.SetActive(false);
             }
@@ -130,7 +149,7 @@ public class WeaponsManager : MonoBehaviour
         
         if (Tier == 4)
         {
-            foreach (var buttoms in MarkerBoss)
+            foreach (var buttoms in RulerBoss)
             {
                 buttoms.SetActive(false);
             }
@@ -173,6 +192,13 @@ public class WeaponsManager : MonoBehaviour
         }
     }
 
+    public void StartShop()
+    {
+        AC.SetWeapon(Basic);
+        WeaponType = 0;
+        Shop.SetActive(false);
+        StartWeapon.SetActive(false);
+    }
 
     public void TaintedShop()
     {
@@ -235,7 +261,7 @@ public class WeaponsManager : MonoBehaviour
     }
     public void MA_MultiTaintedShop()
     {
-        AC.SetWeapon(MA_Multi_Tainted_Balss);
+        AC.SetWeapon(MA_Multi_Tainted_Balls);
         WeaponType = 10;
         Shop.SetActive(false);
     }
@@ -273,7 +299,7 @@ public class WeaponsManager : MonoBehaviour
     }
     public void Rainbow_MA_SplashTaintedShop()
     {
-        AC.SetWeapon(Rainbow_MA_Splash_Tainted_Balss);
+        AC.SetWeapon(Rainbow_MA_Splash_Tainted_Balls);
         WeaponType = 16;
         Shop.SetActive(false);
     }
@@ -285,7 +311,7 @@ public class WeaponsManager : MonoBehaviour
     }
     public void Rainbow_MA_MultiTaintedShop()
     {
-        AC.SetWeapon(Rainbow_MA_Multi_Tainted_Balss);
+        AC.SetWeapon(Rainbow_MA_Multi_Tainted_Balls);
         WeaponType = 18;
         Shop.SetActive(false);
     }
@@ -297,7 +323,7 @@ public class WeaponsManager : MonoBehaviour
     }
     public void FireUpPlus_MA_SplashTaintedShop()
     {
-        AC.SetWeapon(FireUpPlus_MA_Splash_Tainted_Balss);
+        AC.SetWeapon(FireUpPlus_MA_Splash_Tainted_Balls);
         WeaponType = 20;
         Shop.SetActive(false);
     }
@@ -309,7 +335,7 @@ public class WeaponsManager : MonoBehaviour
     }
     public void FireUpPlus_MA_MultiTaintedShop()
     {
-        AC.SetWeapon(FireUpPlus_MA_Multi_Tainted_Balss);
+        AC.SetWeapon(FireUpPlus_MA_Multi_Tainted_Balls);
         WeaponType = 22;
         Shop.SetActive(false);
     }
