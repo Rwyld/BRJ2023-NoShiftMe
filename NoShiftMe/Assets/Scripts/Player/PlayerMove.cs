@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     public float speed;
     private float movInput;
     private Rigidbody2D rb;
+    private Animator animator;
     private SpriteRenderer rend;
     public GameObject LightFront, LightBack;
     private bool activeLight1, activeLight2;
@@ -36,6 +37,7 @@ public class PlayerMove : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
     }
     
     private void Update()
@@ -71,10 +73,13 @@ public class PlayerMove : MonoBehaviour
     {
         movInput = Input.GetAxisRaw("Horizontal");
         //transform.position += new Vector3(movx * speed, 0, 0);
+        
         rb.velocity = new Vector2(movInput * speed, rb.velocity.y);
 
         if (movInput > 0)
         {
+            animator.SetBool("IsMoving", true);
+            
             if(AC.isAttacking) return;
             
             transform.eulerAngles = new Vector3(0, 0, 0);
@@ -90,6 +95,8 @@ public class PlayerMove : MonoBehaviour
         }
         else if (movInput < 0)
         {
+            animator.SetBool("IsMoving", true);
+            
             if(AC.isAttacking) return;
             
             transform.eulerAngles = new Vector3(0, 180, 0);
@@ -101,6 +108,11 @@ public class PlayerMove : MonoBehaviour
             activeLight1 = false;
             
             //rend.flipX = true;
+        }
+        else if (movInput == 0)
+        {
+            animator.SetBool("IsMoving", false);
+
         }
     }
     private void Jump()
