@@ -11,7 +11,9 @@ public class PlayerMove : MonoBehaviour
     private Rigidbody2D rb;
     private Animator animator;
     private SpriteRenderer rend;
-    public GameObject LightFront, LightBack;
+    private TrailRenderer dashLine;
+    public Transform DashPosition;
+    public GameObject LightFront, LightBack, DashBurst;
     private bool activeLight1, activeLight2;
 
     private bool isGrounded;
@@ -38,6 +40,7 @@ public class PlayerMove : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         rend = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>();
+        dashLine = GetComponent<TrailRenderer>();
     }
     
     private void Update()
@@ -52,6 +55,7 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X) && canDash)
         {
             StartCoroutine(Dash());
+            
         }
     }
     
@@ -90,8 +94,6 @@ public class PlayerMove : MonoBehaviour
             LightBack.SetActive(false);
             activeLight2 = false;
 
-            //rend.flipX = false;
-
         }
         else if (movInput < 0)
         {
@@ -106,14 +108,14 @@ public class PlayerMove : MonoBehaviour
             LightFront.SetActive(false);
             LightBack.SetActive(true);
             activeLight1 = false;
-            
-            //rend.flipX = true;
         }
         else if (movInput == 0)
         {
             animator.SetBool("IsMoving", false);
 
         }
+        
+
     }
     private void Jump()
     {
@@ -141,10 +143,15 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Space))
         {
             isJumping = false;
+            
         }
     }
     private IEnumerator Dash()
     {
+        var dburst = Instantiate(DashBurst, DashPosition.position, DashPosition.rotation);
+        Destroy(dburst, 0.5f);
+        dashLine.emitting = true;
+        
         canDash = false;
         isDashing = true;
         rb.gravityScale = 0f;
@@ -158,6 +165,7 @@ public class PlayerMove : MonoBehaviour
 
         yield return new WaitForSeconds(dashTime);
         rb.gravityScale = 5f;
+        dashLine.emitting = false;
         isDashing = false;
         yield return new WaitForSeconds(dashTimeCD);
         canDash = true;

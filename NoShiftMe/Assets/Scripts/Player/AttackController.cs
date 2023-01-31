@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class AttackController : MonoBehaviour
 {
+    [SerializeField] private Animator animator;
     public PlayerMove PM;
     public GameObject currentWeapon, meleeSpecial;
     public Transform[] weaponPos;
@@ -53,6 +54,7 @@ public class AttackController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.C) && timeAttack < 0)
         {
+            animator.SetBool("IsShooting", true);
             if (TypeAttack == "Multishoot")
             {
                 foreach (var pos in weaponPos)
@@ -76,6 +78,7 @@ public class AttackController : MonoBehaviour
         else if (Input.GetKeyUp(KeyCode.C))
         {
             isAttacking = false;
+            animator.SetBool("IsShooting", false);
         }
     }
 
